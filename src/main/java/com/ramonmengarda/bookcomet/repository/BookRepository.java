@@ -1,4 +1,4 @@
-package com.ramonmengarda.bookcomet.inventory;
+package com.ramonmengarda.bookcomet.repository;
 
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
@@ -6,6 +6,6 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import com.ramonmengarda.bookcomet.model.Book;
 
 @RepositoryRestResource(collectionResourceRel = "books", path = "books")
-public interface BookInventory extends PagingAndSortingRepository<Book, Long> {
-	//
+public interface BookRepository extends PagingAndSortingRepository<Book, Long> {
+	
 }
