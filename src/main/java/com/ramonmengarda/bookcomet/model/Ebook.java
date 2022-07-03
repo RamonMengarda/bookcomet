@@ -1,7 +1,9 @@
 package com.ramonmengarda.bookcomet.model;
 
 import java.util.ArrayList;
+import java.util.Set;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 
@@ -14,13 +16,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @Entity
+@DiscriminatorValue("1")
 public class Ebook extends Book{
     
     @NotNull
     Format format;
 
     @Builder(builderMethodName = "ebookBuilder")
-    public Ebook(long id, String name, ArrayList<String> authors, String publisher, int publishYear, String summary, Format format){
+    public Ebook(long id, String name, String authors, String publisher, int publishYear, String summary, Format format){
         super(id, name, authors, publisher, publishYear, summary);
         this.format = format;
     }
