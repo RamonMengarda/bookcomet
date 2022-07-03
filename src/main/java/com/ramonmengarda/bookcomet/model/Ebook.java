@@ -1,8 +1,5 @@
 package com.ramonmengarda.bookcomet.model;
 
-import java.util.ArrayList;
-import java.util.Set;
-
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
