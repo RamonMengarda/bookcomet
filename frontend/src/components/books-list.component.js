@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import BookDataService from "../services/book.service";
 import { Link } from "react-router-dom";
+
 export default class BooksList extends Component {
   constructor(props) {
     super(props);
@@ -59,7 +60,7 @@ export default class BooksList extends Component {
       })
       .catch(e => {
         console.log(e);
-        alert("Unable to delete. Please verify if this book is on inventory")
+        alert("Unable to delete. Please verify if this book has positive inventory");
       });
   }
   searchAuthor() {
@@ -120,7 +121,6 @@ export default class BooksList extends Component {
           >
             <button
               className="m-3 btn btn-sm btn-danger"
-              onClick={this.removeAllBooks}
             >
               Adicionar novo
             </button>
@@ -172,15 +172,12 @@ export default class BooksList extends Component {
                 {currentBook.format}
               </div>}
               <div>
-                <Link
-                  to={"/books/" + currentBook.id}
-                >
-                  <button
+                  {/*The edit button is disbled because there's no implementation for updating book yet*/}
+                  <button disabled={true}
                     className="m-3 btn btn-sm btn-danger"
                   >
                     Edit
                   </button>
-                </Link>
               </div>
               <div>
                 <button

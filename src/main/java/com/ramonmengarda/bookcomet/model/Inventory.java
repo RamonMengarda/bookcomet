@@ -6,10 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
 
@@ -23,7 +22,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @Entity
-@Table(name="inventory")
+@Table(name="inventory", uniqueConstraints = {@UniqueConstraint(columnNames = {"book_id"})})
 public class Inventory {
     
     @Id
@@ -32,6 +31,7 @@ public class Inventory {
     private long id;
     
     @NotNull
+    //Relatioship definition between Inventory and Book is 121, primary and foreign key are the id fields on each table
     @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "book_id", referencedColumnName = "id")
     private Book book;

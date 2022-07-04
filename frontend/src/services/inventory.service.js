@@ -1,5 +1,5 @@
 import http from "../http-common";
-class BookDataService {
+class InventoryDataService {
   getAll() {
     return http.get("/inventory");
   }
@@ -15,11 +15,5 @@ class BookDataService {
   delete(id) {
     return http.delete(`/inventory/${id}`);
   }
-  deleteAll() {
-    return http.delete(`/inventory`);
-  }
-  findByTitle(title) {
-    return http.get(`/inventory?title=${title}`);
-  }
 }
-export default new BookDataService();
+export default new InventoryDataService();

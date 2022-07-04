@@ -9,8 +9,9 @@ import com.ramonmengarda.bookcomet.model.Book;
 
 @RepositoryRestResource(collectionResourceRel = "books", path = "books")
 public interface BookRepository extends PagingAndSortingRepository<Book, Long> {
-    
+    //Find book by publisher name
     List<Book> findByPublisher(String publisher);
     
+    //Find book by name - or part of the name of an author
     List<Book> findByAuthorsContaining(String authors);
 }

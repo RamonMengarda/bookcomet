@@ -7,5 +7,4 @@ import com.ramonmengarda.bookcomet.model.Inventory;
 
 @RepositoryRestResource(collectionResourceRel = "inventory", path = "inventory")
 public interface InventoryRepository extends PagingAndSortingRepository<Inventory, Long> {
-
 }

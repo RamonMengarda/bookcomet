@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
 import AddBook from "./components/add-book.component";
+import AddInventory from "./components/add-inventory.component";
 import BooksList from "./components/books-list.component";
 import InventoryList from "./components/inventory-list.component";
 
@@ -35,6 +36,7 @@ class App extends Component {
             <Route exact path="/books" element={<BooksList/>} />
             <Route exact path="/inventory" element={<InventoryList/>} />
             <Route exact path="/books/add" element={<AddBook/>} />
+            <Route exact path="/inventory/add" element={<AddInventory/>} />
           </Routes>
         </div>
       </div>

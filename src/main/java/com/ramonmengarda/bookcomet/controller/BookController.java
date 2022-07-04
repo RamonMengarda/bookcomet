@@ -1,7 +1,9 @@
 package com.ramonmengarda.bookcomet.controller;
 
 import com.google.common.collect.Lists;
+
 import com.ramonmengarda.bookcomet.model.Book;
+import com.ramonmengarda.bookcomet.repository.BookRepository;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -18,8 +20,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.ramonmengarda.bookcomet.repository.BookRepository;
 
 @RestController
 @RequestMapping("/books")
@@ -52,7 +52,7 @@ public class BookController {
     public ResponseEntity updateBook(@PathVariable Long id, @RequestBody Book book) {
         Book currentBook = bookRepository.findById(id).orElseThrow(RuntimeException::new);
         currentBook.setName(book.getName());
-        //currentBook.setAuthors(book.getAuthors());
+        currentBook.setAuthors(book.getAuthors());
         currentBook.setPublisher(book.getPublisher());
         currentBook.setPublishYear(book.getPublishYear());
         currentBook.setSummary(book.getSummary());
