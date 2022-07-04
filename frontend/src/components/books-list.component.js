@@ -8,7 +8,7 @@ export default class BooksList extends Component {
     this.retrieveBooks = this.retrieveBooks.bind(this);
     this.refreshList = this.refreshList.bind(this);
     this.setActiveBook = this.setActiveBook.bind(this);
-    this.removeAllBooks = this.removeAllBooks.bind(this);
+    this.deleteBook = this.deleteBook.bind(this);
     this.searchTitle = this.searchTitle.bind(this);
     this.state = {
       books: [],
@@ -51,14 +51,15 @@ export default class BooksList extends Component {
       currentIndex: index
     });
   }
-  removeAllBooks() {
-    BookDataService.deleteAll()
+  deleteBook() {
+    BookDataService.delete(this.state.currentBook.id)
       .then(response => {
         console.log(response.data);
         this.refreshList();
       })
       .catch(e => {
         console.log(e);
+        alert("Unable to delete. Please verify if this book is on inventory")
       });
   }
   searchTitle() {
@@ -110,45 +111,85 @@ export default class BooksList extends Component {
                   onClick={() => this.setActiveBook(book, index)}
                   key={index}
                 >
-                  {book.title}
+                  {book.name}
                 </li>
               ))}
           </ul>
-          <button
-            className="m-3 btn btn-sm btn-danger"
-            onClick={this.removeAllBooks}
+          <Link
+            to={"/books/add"}
           >
-            Remove All
-          </button>
+            <button
+              className="m-3 btn btn-sm btn-danger"
+              onClick={this.removeAllBooks}
+            >
+              Adicionar novo
+            </button>
+          </Link>
         </div>
         <div className="col-md-6">
           {currentBook ? (
             <div>
-              <h4>Book</h4>
+              {!currentBook.format &&
+                <h4>Book</h4>
+              }
+              {currentBook.format &&
+                <h4>EBook</h4>
+              }
               <div>
                 <label>
-                  <strong>Title:</strong>
+                  <strong>Name:</strong>
                 </label>{" "}
-                {currentBook.title}
+                {currentBook.name}
               </div>
               <div>
                 <label>
-                  <strong>Description:</strong>
+                  <strong>Authors:</strong>
                 </label>{" "}
-                {currentBook.description}
+                {currentBook.authors}
               </div>
               <div>
                 <label>
-                  <strong>Status:</strong>
+                  <strong>Publisher:</strong>
                 </label>{" "}
-                {currentBook.published ? "Published" : "Pending"}
+                {currentBook.publisher}
               </div>
-              <Link
-                to={"/books/" + currentBook.id}
-                className="badge badge-warning"
-              >
-                Edit
-              </Link>
+              <div>
+                <label>
+                  <strong>Year:</strong>
+                </label>{" "}
+                {currentBook.publishYear}
+              </div>
+              <div>
+                <label>
+                  <strong>Summary:</strong>
+                </label>{" "}
+                {currentBook.summary}
+              </div>
+              {currentBook.format && <div>
+                <label>
+                  <strong>Format:</strong>
+                </label>{" "}
+                {currentBook.format}
+              </div>}
+              <div>
+                <Link
+                  to={"/books/" + currentBook.id}
+                >
+                  <button
+                    className="m-3 btn btn-sm btn-danger"
+                  >
+                    Edit
+                  </button>
+                </Link>
+              </div>
+              <div>
+                <button
+                  className="m-3 btn btn-sm btn-danger"
+                  onClick={this.deleteBook}
+                >
+                  Delete
+                </button>
+              </div>
             </div>
           ) : (
             <div>

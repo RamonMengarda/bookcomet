@@ -4,8 +4,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
 import AddBook from "./components/add-book.component";
-import Book from "./components/book.component";
 import BooksList from "./components/books-list.component";
+import InventoryList from "./components/inventory-list.component";
 
 class App extends Component {
   render() {
@@ -22,8 +22,8 @@ class App extends Component {
               </Link>
             </li>
             <li className="nav-item">
-              <Link to={"/add"} className="nav-link">
-                Add
+              <Link to={"/inventory"} className="nav-link">
+                Inventory
               </Link>
             </li>
           </div>
@@ -33,8 +33,8 @@ class App extends Component {
           <Routes>
             <Route exact path="/" element={<BooksList/>} />
             <Route exact path="/books" element={<BooksList/>} />
-            <Route exact path="/add" element={<AddBook/>} />
-            <Route path="/books/:id" element={<Book/>} />
+            <Route exact path="/inventory" element={<InventoryList/>} />
+            <Route exact path="/books/add" element={<AddBook/>} />
           </Routes>
         </div>
       </div>

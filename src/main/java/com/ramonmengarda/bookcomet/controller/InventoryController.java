@@ -2,12 +2,14 @@ package com.ramonmengarda.bookcomet.controller;
 
 import com.google.common.collect.Lists;
 import com.ramonmengarda.bookcomet.model.Book;
+import com.ramonmengarda.bookcomet.model.Inventory;
 
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,6 +25,7 @@ import com.ramonmengarda.bookcomet.repository.InventoryRepository;
 
 @RestController
 @RequestMapping("/inventory")
+@CrossOrigin
 public class InventoryController {
 
     private final InventoryRepository inventoryRepository;
@@ -30,17 +33,9 @@ public class InventoryController {
     public InventoryController(InventoryRepository inventoryRepository){
         this.inventoryRepository = inventoryRepository;
     }
-    /*
-    @PostMapping
-    public ResponseEntity createBook(@RequestBody Book book) throws URISyntaxException {
-        Book savedBook = bookRepository.save(book);
-        return ResponseEntity.created(new URI("/books/" + savedBook.getId())).body(savedBook);
+
+    @GetMapping
+    public List<Inventory> getInventory(){
+        return Lists.newArrayList(inventoryRepository.findAll());
     }
-
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity deleteBook(@PathVariable Long id) {
-        bookRepository.deleteById(id);
-        return ResponseEntity.ok().build();
-    } */
 }

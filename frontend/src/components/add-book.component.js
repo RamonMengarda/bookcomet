@@ -3,54 +3,85 @@ import BookDataService from "../services/book.service";
 export default class AddBook extends Component {
   constructor(props) {
     super(props);
-    this.onChangeTitle = this.onChangeTitle.bind(this);
-    this.onChangeDescription = this.onChangeDescription.bind(this);
+    this.onChangeName = this.onChangeName.bind(this);
+    this.onChangeAuthors = this.onChangeAuthors.bind(this);
+    this.onChangePublisher = this.onChangePublisher.bind(this);
+    this.onChangePublishYear = this.onChangePublishYear.bind(this);
+    this.onChangeSummary = this.onChangeSummary.bind(this);
     this.saveBook = this.saveBook.bind(this);
     this.newBook = this.newBook.bind(this);
     this.state = {
       id: null,
-      title: "",
-      description: "", 
-      published: false,
-      submitted: false
+      name: "",
+      authors: "", 
+      publisher: "",
+      publishYear: null,
+      summary: "",
+
+      submitted:false
     };
   }
-  onChangeTitle(e) {
+  onChangeName(e) {
     this.setState({
-      title: e.target.value
+      name: e.target.value
     });
   }
-  onChangeDescription(e) {
+  onChangeAuthors(e) {
     this.setState({
-      description: e.target.value
+      authors: e.target.value
+    });
+  }
+  onChangePublisher(e) {
+    this.setState({
+      publisher: e.target.value
+    });
+  }
+  onChangePublishYear(e) {
+    this.setState({
+      publishYear: e.target.value
+    });
+  }
+  onChangeSummary(e) {
+    this.setState({
+      summary: e.target.value
     });
   }
   saveBook() {
     var data = {
-      title: this.state.title,
-      description: this.state.description
+      name: this.state.name,
+      authors: this.state.authors,
+      publisher: this.state.publisher,
+      publishYear: this.state.publishYear,
+      summary: this.state.summary
     };
     BookDataService.create(data)
       .then(response => {
         this.setState({
           id: response.data.id,
-          title: response.data.title,
-          description: response.data.description,
-          published: response.data.published,
-          submitted: true
+          name: response.data.name,
+          authors: response.data.authors,
+          publisher: response.data.publisher,
+          publishYear: response.data.publishYear,
+          summary: response.data.summary,
+
+          submitted:true
         });
         console.log(response.data);
       })
       .catch(e => {
+        alert("Unable to insert. Please verify if entry is not a duplicate.")
         console.log(e);
       });
   }
   newBook() {
     this.setState({
       id: null,
-      title: "",
-      description: "",
-      published: false,
+      name: "",
+      authors: "",
+      publisher: "",
+      publishYear: null,
+      summary: "",
+
       submitted: false
     });
   }
@@ -67,30 +98,64 @@ export default class AddBook extends Component {
         ) : (
           <div>
             <div className="form-group">
-              <label htmlFor="title">Title</label>
+              <label htmlFor="name">Name</label>
               <input
                 type="text"
                 className="form-control"
-                id="title"
+                id="name"
                 required
-                value={this.state.title}
-                onChange={this.onChangeTitle}
-                name="title"
+                value={this.state.name}
+                onChange={this.onChangeName}
+                name="name"
               />
             </div>
             <div className="form-group">
-              <label htmlFor="description">Description</label>
+              <label htmlFor="authors">Authors</label>
               <input
                 type="text"
                 className="form-control"
-                id="description"
+                id="authors"
                 required
-                value={this.state.description}
-                onChange={this.onChangeDescription}
-                name="description"
+                value={this.state.authors}
+                onChange={this.onChangeAuthors}
+                name="authors"
               />
             </div>
-            <button onClick={this.saveBook} className="btn btn-success">
+            <div className="form-group">
+              <label htmlFor="publisher">Publisher</label>
+              <input
+                type="text"
+                className="form-control"
+                id="publisher"
+                value={this.state.publisher}
+                onChange={this.onChangePublisher}
+                name="authors"
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="publishYear">Year</label>
+              <input
+                type="number"
+                className="form-control"
+                id="publishYear"
+                value={this.state.publishYear}
+                onChange={this.onChangePublishYear}
+                name="publishYear"
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="summary">Summary</label>
+              <input
+                type="text"
+                className="form-control"
+                id="summary"
+                value={this.state.summary}
+                onChange={this.onChangeSummary}
+                name="summary"
+              />
+            </div>
+            <button style={{marginTop:"10px"}}
+              onClick={this.saveBook} className="btn btn-success">
               Submit
             </button>
           </div>
