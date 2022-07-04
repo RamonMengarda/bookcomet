@@ -4,26 +4,26 @@ import { Link } from "react-router-dom";
 export default class BooksList extends Component {
   constructor(props) {
     super(props);
-    this.onChangeSearchTitle = this.onChangeSearchTitle.bind(this);
+    this.onChangeSearchAuthor = this.onChangeSearchAuthor.bind(this);
     this.retrieveBooks = this.retrieveBooks.bind(this);
     this.refreshList = this.refreshList.bind(this);
     this.setActiveBook = this.setActiveBook.bind(this);
     this.deleteBook = this.deleteBook.bind(this);
-    this.searchTitle = this.searchTitle.bind(this);
+    this.searchAuthor = this.searchAuthor.bind(this);
     this.state = {
       books: [],
       currentBook: null,
       currentIndex: -1,
-      searchTitle: ""
+      searchAuthor: ""
     };
   }
   componentDidMount() {
     this.retrieveBooks();
   }
-  onChangeSearchTitle(e) {
-    const searchTitle = e.target.value;
+  onChangeSearchAuthor(e) {
+    const searchAuthor = e.target.value;
     this.setState({
-      searchTitle: searchTitle
+      searchAuthor: searchAuthor
     });
   }
   retrieveBooks() {
@@ -62,8 +62,8 @@ export default class BooksList extends Component {
         alert("Unable to delete. Please verify if this book is on inventory")
       });
   }
-  searchTitle() {
-    BookDataService.findByTitle(this.state.searchTitle)
+  searchAuthor() {
+    BookDataService.findByAuthor(this.state.searchAuthor)
       .then(response => {
         this.setState({
           books: response.data
@@ -75,7 +75,7 @@ export default class BooksList extends Component {
       });
   }
   render() {
-    const { searchTitle, books, currentBook, currentIndex } = this.state;
+    const { searchAuthor, books, currentBook, currentIndex } = this.state;
     return (
       <div className="list row">
         <div className="col-md-8">
@@ -83,15 +83,15 @@ export default class BooksList extends Component {
             <input
               type="text"
               className="form-control"
-              placeholder="Search by title"
-              value={searchTitle}
-              onChange={this.onChangeSearchTitle}
+              placeholder="Search by author"
+              value={searchAuthor}
+              onChange={this.onChangeSearchAuthor}
             />
             <div className="input-group-append">
               <button
                 className="btn btn-outline-secondary"
                 type="button"
-                onClick={this.searchTitle}
+                onClick={this.searchAuthor}
               >
                 Search
               </button>

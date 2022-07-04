@@ -15,11 +15,11 @@ class BookDataService {
   delete(id) {
     return http.delete(`/books/${id}`);
   }
-  deleteAll() {
-    return http.delete(`/books`);
+  findByAuthor(author) {
+    return http.get(`/books/author?author=${author}`);
   }
-  findByTitle(title) {
-    return http.get(`/books?title=${title}`);
+  findByPublisher(publisher) {
+    return http.get(`/books/publisher?publisher=${publisher}`);
   }
 }
 export default new BookDataService();
