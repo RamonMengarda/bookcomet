@@ -1,33 +1,44 @@
-import React, { Component } from 'react';
-import './App.css';
+import React, { Component } from "react";
+import { Routes, Route, Link } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
+
+import AddBook from "./components/add-book.component";
+import Book from "./components/book.component";
+import BooksList from "./components/books-list.component";
 
 class App extends Component {
-    state = {
-      books: []
-    };
-  
-    async componentDidMount() {
-      const response = await fetch('/books');
-      const body = await response.json();
-      this.setState({books: body});
-    }
-  
-    render() {
-      const {books} = this.state;
-      return (
-          <div className="App">
-            <header className="App-header">
-              <div className="App-intro">
-                <h2>Books</h2>
-                {books.map(book =>
-                    <div key={book.id}>
-                      {book.name} ({book.email})
-                    </div>
-                )}
-              </div>
-            </header>
+  render() {
+    return (
+      <div>
+        <nav className="navbar navbar-expand navbar-dark bg-dark">
+          <a href="/books" className="navbar-brand">
+            BookComet
+          </a>
+          <div className="navbar-nav mr-auto">
+            <li className="nav-item">
+              <Link to={"/books"} className="nav-link">
+                Books
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to={"/add"} className="nav-link">
+                Add
+              </Link>
+            </li>
           </div>
-      );
-    }
+        </nav>
+
+        <div className="container mt-3">
+          <Routes>
+            <Route exact path="/" element={<BooksList/>} />
+            <Route exact path="/books" element={<BooksList/>} />
+            <Route exact path="/add" element={<AddBook/>} />
+            <Route path="/books/:id" element={<Book/>} />
+          </Routes>
+        </div>
+      </div>
+    );
   }
-  export default App;
+}
+export default App;
