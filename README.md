@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-This projext's goal was to develop a library system, consisting on regular books and Ebooks.
+This project's goal was to develop a library system, consisting on regular books and Ebooks.
 
 ### Backend
  SpringBoot
